@@ -14,7 +14,7 @@ django-environ==0.4.5
 drf-yasg==1.20.0
 
 # Tools
-django-extensions==2.1.4
+django-extensions==3.0
 
 #  Seguridad via Token
 djangorestframework-simplejwt==4.4.0
