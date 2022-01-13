@@ -1,0 +1,30 @@
+#Base
+pytz==2021.1
+sqlparse==0.4.1
+psycopg2==2.7.4 --no-binary psycopg2
+
+#Django
+django==2.2.16
+djangorestframework==3.12.4
+
+# Environment
+django-environ==0.4.5
+
+# Docs
+drf-yasg==1.20.0
+
+# Tools
+django-extensions==2.1.4
+
+#  Seguridad via Token
+djangorestframework-simplejwt==4.4.0
+PyJWT==1.7.0
+
+#Factoryboy
+factory-boy==3.2.0
+Faker==2.0.1
+
+#Consumo
+requests
+
+gunicorn==20.1.0

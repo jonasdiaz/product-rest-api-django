@@ -1,0 +1,40 @@
+version: '3'
+
+volumes:
+  production_postgres_data: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    image: api_django_products
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+    env_file:
+      - ./.envs/production/.django
+      - ./.envs/production/.postgres
+    ports:
+      - 8000
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: mav_db_postgres
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.envs/production/.postgres
+  
+  nginx:
+    build: 
+      context: .
+      dockerfile: ./compose/production/nginx/Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - django
