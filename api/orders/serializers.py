@@ -22,7 +22,10 @@ class OrderModelSerializer(serializers.ModelSerializer):
         if service_order.validate_products_in_zeros(validated_data) == False:
             raise serializers.ValidationError("No es posible si la cantiad es 0")
         if service_order.validate_products_duplicate(validated_data) == False:
-            raise serializers.ValidationError("hay productos duplicados")
+            raise serializers.ValidationError("Existen productos duplicados")
+        products = [i['product'] for i in validated_data['order_details']]
+        if Product.objects.filter(pk__in=products, stock__gte=3).exists():
+            raise serializers.ValidationError("No hay suficiente stock")
         return validated_data
 
     def create(self, validated_data):
